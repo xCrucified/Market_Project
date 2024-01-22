@@ -18,18 +18,9 @@ namespace data_access.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>().HasData(new[]
             {
-                new Product() { Id = 1, Name = "Ticket", Category = "Travel", Description = "Not exist", InStock = true, Discount = 10, Price = 650, ImageUrl = "" },
-                new Product() { Id = 2, Name = "Smartphone", Category = "Electronics", Description = "High-performance device", InStock = true, Discount = 5, Price = 899, ImageUrl = "" },
-                new Product() { Id = 3, Name = "Running Shoes", Category = "Sports", Description = "Comfortable and durable", InStock = true, Discount = 15, Price = 79, ImageUrl = "" },
-                new Product() { Id = 4, Name = "Laptop", Category = "Electronics", Description = "Powerful and lightweight", InStock = true, Discount = 12, Price = 1299, ImageUrl = "" },
-                new Product() { Id = 5, Name = "Cookware Set", Category = "Home and Kitchen", Description = "Non-stick and easy to clean", InStock = true, Discount = 8, Price = 149, ImageUrl = "" },
-                new Product() { Id = 6, Name = "Camera", Category = "Electronics", Description = "High-resolution images", InStock = true, Discount = 20, Price = 599, ImageUrl = "" },
-                new Product() { Id = 7, Name = "Fitness Tracker", Category = "Sports", Description = "Tracks your activity and health", InStock = true, Discount = 10, Price = 49, ImageUrl = "" },
-                new Product() { Id = 8, Name = "Headphones", Category = "Electronics", Description = "Noise-canceling and comfortable", InStock = true, Discount = 15, Price = 129, ImageUrl = "" },
-                new Product() { Id = 9, Name = "Backpack", Category = "Fashion", Description = "Stylish and spacious", InStock = true, Discount = 8, Price = 39, ImageUrl = "" },
-                new Product() { Id = 10, Name = "Gaming Console", Category = "Electronics", Description = "Immersive gaming experience", InStock = true, Discount = 10, Price = 299, ImageUrl = "" },
-                new Product() { Id = 11, Name = "Coffee Maker", Category = "Home and Kitchen", Description = "Brews delicious coffee", InStock = true, Discount = 10, Price = 79, ImageUrl = "" },
-                new Product() { Id = 12, Name = "Outdoor Tent", Category = "Camping", Description = "Weather-resistant and easy to set up", InStock = true, Discount = 15, Price = 199, ImageUrl = "" }
+                new Product() { Id = 1, Name = "Ticket", Category = "Travel", Description = "Not exist", InStock = true, Discount = 10, Price = 650, ImageUrl = "https://th.bing.com/th/id/OIP.f41ft8r1DGylDfCVbQXJTQAAAA?rs=1&pid=ImgDetMain" },
+                new Product() { Id = 2, Name = "Smartphone", Category = "Electronics", Description = "High-performance device", InStock = true, Discount = 5, Price = 899, ImageUrl = "https://th.bing.com/th/id/OIP.6OI-0NfjMZtcYKH8VulQjgHaFe?rs=1&pid=ImgDetMain" },
+                new Product() { Id = 3, Name = "Running Shoes", Category = "Sports", Description = "Comfortable and durable", InStock = true, Discount = 15, Price = 79, ImageUrl = "https://th.bing.com/th/id/OIP.mgap1fs9rd1GOuf4S4KQTwHaEE?rs=1&pid=ImgDetMain" },
             });
             modelBuilder.Entity<User>().HasData(new[]
             {

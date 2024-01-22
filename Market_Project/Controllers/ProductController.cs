@@ -36,5 +36,16 @@ namespace Market_Project.Controllers
 
             return View(product);
         }
+        public IActionResult Delete(int id)
+        {
+            var product = context.Products.Find(id);
+
+            if (product == null) return NotFound();
+
+            context.Remove(product);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
