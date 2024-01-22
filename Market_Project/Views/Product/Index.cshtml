@@ -1,0 +1,17 @@
+﻿@using data_access.Data.Entities
+@model List<Product>;
+
+<div class="d-flex gap-4 flex-wrap">
+    @foreach(var i in Model)
+    {  
+        <div class="card" style="width: 18rem;">
+            <img src="@i.ImageUrl" class="card" alt="...">
+
+            <div class="card-body">
+                <h5 class="card-title">@i.Name</h5>
+                <p class="card-text">@i.Description</p>
+                <a class="btn btn-dark" asp-action="Details" asp-route-id="@i.Id"></a>
+            </div>
+        </div>
+    }
+</div>
