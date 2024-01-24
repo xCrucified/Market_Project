@@ -1,5 +1,6 @@
 using data_access.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
 
 namespace Market_Project
 {
@@ -15,7 +16,7 @@ namespace Market_Project
             builder.Services.AddDbContext<MarketDbContext>(opts => opts.UseSqlServer(connStr));
 
             var app = builder.Build();
-
+                
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

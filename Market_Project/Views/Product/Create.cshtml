@@ -18,10 +18,11 @@
         <input asp-for=Discount type="number" min="0" class="form-control" placeholder="Enter discount (%)">
         <span asp-validation-for="Discount" class="form-text text-danger"></span>
     </div>
-    <div class="col-6">
-        <label asp-for=Category class="form-label">Category</label>
-        <input asp-for=Category type="text" class="form-control" placeholder="Enter category">
-        <span asp-validation-for="Category" class="form-text text-danger"></span>
+    <div class="col-md-6">
+        <label asp-for=CategoryId class="form-label">State</label>
+        <select asp-for=CategoryId asp-items=ViewBag.Categories class="form-select">
+            <option disabled selected>Choose...</option>
+        </select>
     </div>
     <div class="col-12">
         <label asp-for=ImageUrl class="form-label">Image URL</label>
@@ -85,10 +86,10 @@
         </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-6">
         <a asp-action="Index" class="btn btn-dark w-100">Back</a>
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
         <button type="submit" class="btn btn-success w-100">Create New Product</button>
     </div>
 </form>

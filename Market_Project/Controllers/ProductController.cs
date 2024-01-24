@@ -1,13 +1,17 @@
 ﻿using data_access.Data;
 using data_access.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Market_Project.Controllers
 {
     public class ProductController : Controller
     {
         private readonly MarketDbContext context;
-
+        private void LoadCategories()
+        {
+            ViewBag.Categories = new SelectList(context.Categories.ToList(), nameof(Category.Id), nameof(Category.Name));
+        }
         public ProductController(MarketDbContext context)
         {
             this.context = context;
@@ -21,10 +25,12 @@ namespace Market_Project.Controllers
 
         public IActionResult Create(Product model)
         {
+            LoadCategories();
             if (!ModelState.IsValid) return View();
 
             context.Products.Add(model);
             context.SaveChanges();
+            ViewBag.Categories = new SelectList(context.Categories, "Name", "Id");
 
             return RedirectToAction(nameof(Index));
         }
@@ -32,10 +38,15 @@ namespace Market_Project.Controllers
         public IActionResult Details(int id)
         {
             var product = context.Products.Find(id);
+            context.Entry(product)
+                .Reference(x => x.Categories)
+                .Load();
+
             if (product == null) return NotFound();
 
             return View(product);
         }
+        public IActionResult Edit() => View();
         public IActionResult Delete(int id)
         {
             var product = context.Products.Find(id);

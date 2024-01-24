@@ -11,16 +11,13 @@ namespace Market_Project.Validators
                 .NotEmpty()
                 .MinimumLength(2)
                 .Matches("[A-Z].*").WithMessage("{PropertyName} must starts with uppercase letter.");
-            RuleFor(x => x.Category)
-                .NotEmpty()
-                .MinimumLength(4)
-                .Matches("[A-Z].*").WithMessage("{PropertyName} must starts with uppercase letter.");
+            RuleFor(x => x.CategoryId)
+                .NotEmpty();
             RuleFor(x => x.Price)
                 .NotEmpty()
                 .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} can not be negative.");
 
             RuleFor(x => x.Discount)
-                .NotEmpty()
                 .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} can not be negative.");
 
             RuleFor(x => x.Description)
@@ -42,5 +39,6 @@ namespace Market_Project.Validators
             return Uri.TryCreate(link, UriKind.Absolute, out outUri) 
                 && (outUri.Scheme == Uri.UriSchemeHttp || outUri.Scheme == Uri.UriSchemeHttps);
         }
+        //asd//
     }
 }
