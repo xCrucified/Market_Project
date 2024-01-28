@@ -27,48 +27,6 @@
     <div class="col-12">
         <label asp-for=ImageUrl class="form-label">Image URL</label>
         <input asp-for=ImageUrl type="url" class="form-control" placeholder="Enter image URL">
-    @*    <form action="BufferedSingleFileUploadPhysical/?handler=Upload"
-              enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
-              method="post">
-            <dl>
-                <dt>
-                    <label for="FileUpload_FormFile">File</label>
-                </dt>
-                <dd>
-                    <input id="FileUpload_FormFile" type="file"
-                           name="FileUpload.FormFile" />
-                </dd>
-            </dl>
-
-            <input class="btn" type="submit" value="Upload" />
-
-            <div style="margin-top:15px">
-                <output name="result"></output>
-            </div>
-        </form>
-
-        <script>
-            async function AJAXSubmit(oFormElement) {
-                var resultElement = oFormElement.elements.namedItem("result");
-                const formData = new FormData(oFormElement);
-
-                try {
-                    const response = await fetch(oFormElement.action, {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (response.ok) {
-                        window.location.href = '/';
-                    }
-
-                    resultElement.value = 'Result: ' + response.status + ' ' +
-                        response.statusText;
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            }
-        </script>*@
         <span asp-validation-for="ImageUrl" class="form-text text-danger"></span>
     </div>
     <div class="col-12">

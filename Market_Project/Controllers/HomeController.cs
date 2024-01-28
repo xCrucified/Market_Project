@@ -1,6 +1,7 @@
 using data_access.Data;
 using Market_Project.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 
@@ -16,7 +17,8 @@ namespace Market_Project.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var products = context.Products.Include(x => x.Categories).ToList();
+            return View(products);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

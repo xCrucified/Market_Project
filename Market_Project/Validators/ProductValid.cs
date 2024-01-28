@@ -25,7 +25,6 @@ namespace Market_Project.Validators
                 .Matches("[A-Z].*").WithMessage("{PropertyName} must starts with uppercase letter.");
 
             RuleFor(x => x.ImageUrl)
-                .NotEmpty()
                 .Must(LinkMustBeAUri).WithMessage("{PropertyName} must be a valid URL address.");
         }
         private static bool LinkMustBeAUri(string link)

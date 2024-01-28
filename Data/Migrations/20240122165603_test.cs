@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using data_access;
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional

@@ -1,0 +1,55 @@
+﻿@using data_access.Data.Entities;
+@model Product;
+
+@* <div class="card h-100 home-card">
+    <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path">
+        <img src="@Model.ImageUrl" class="card-img-top" alt="Product Image">
+    </a>
+    <div class="card-body">
+        <h5 class="card-title">
+            <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path">@Model.Name</a>
+        </h5>
+        <p class="card-text">
+            @Model.Price$
+            @if (Model.Discount > 0)
+            {
+                <span class="badge bg-danger">SALE</span>
+            }
+            <br />
+            @Model.Categories?.Name
+        </p>
+        <div>
+            <button type="button" class="btn btn-primary mb-1">Add to Cart</button>
+            <button type="button" class="btn btn-success mb-1">Buy Now</button>
+         </div>
+    </div>
+</div> *@
+<div class="card" style="width: 18rem;">
+    <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path">
+        <img src="@Model.ImageUrl" class="card-img-top" alt="Product Image">
+    </a>
+    <div class="card-body d-flex flex-column justify-content-end gap-2 text-start">
+        <div class="d-flex flex-column justify-content-start">
+            <h5 class="card-title fw-lighter">@Model.Name</h5>
+            <p class="card-text fw-bold">
+                @Model.Price$
+                @if (Model.Discount > 0)
+                {
+                    <span class="badge bg-success">SALE</span>
+                }
+                <br />
+            </p>
+            @* @Model.Categories?.Name *@
+        </div>
+        @* <p class="card-text">@Model.Description</p> *@
+        <hr class="m-0 p-0"/>
+        <div class="text-size d-flex flex-column gap-0">
+            <p class="mb-0">Country</p>
+            <p class="mb-0">Date of post</p>
+        </div>
+        @* <div>
+            <button type="button" class="btn btn-primary mb-1">Add to Cart</button>
+            <button type="button" class="btn btn-success mb-1">Buy Now</button>
+        </div> *@
+    </div>
+</div>

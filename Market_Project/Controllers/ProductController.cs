@@ -46,7 +46,29 @@ namespace Market_Project.Controllers
 
             return View(product);
         }
-        public IActionResult Edit() => View();
+        public IActionResult Edit(int id)
+        {
+            var product = context.Products.Find(id);
+            if (product == null) return NotFound();
+
+            LoadCategories();
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product model)
+        {
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View();
+            }
+
+            context.Products.Update(model);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Delete(int id)
         {
             var product = context.Products.Find(id);
