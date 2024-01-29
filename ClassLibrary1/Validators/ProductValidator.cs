@@ -1,23 +1,31 @@
-﻿using data_access.Data.Entities;
+﻿using BusinessLogic.DTOs;
 using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Market_Project.Validators
+namespace BusinessLogic.Validators
 {
-    public class ProductValid : AbstractValidator<Product>
+    public class ProductValidator : AbstractValidator<ProductDto>
     {
-        public ProductValid()
+        public ProductValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .MinimumLength(2)
                 .Matches("[A-Z].*").WithMessage("{PropertyName} must starts with uppercase letter.");
+
             RuleFor(x => x.CategoryId)
                 .NotEmpty();
+
             RuleFor(x => x.Price)
                 .NotEmpty()
                 .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} can not be negative.");
 
             RuleFor(x => x.Discount)
+                .NotEmpty()
                 .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} can not be negative.");
 
             RuleFor(x => x.Description)
@@ -25,8 +33,10 @@ namespace Market_Project.Validators
                 .Matches("[A-Z].*").WithMessage("{PropertyName} must starts with uppercase letter.");
 
             RuleFor(x => x.ImageUrl)
+                .NotEmpty()
                 .Must(LinkMustBeAUri).WithMessage("{PropertyName} must be a valid URL address.");
         }
+
         private static bool LinkMustBeAUri(string link)
         {
             if (string.IsNullOrWhiteSpace(link))
@@ -34,10 +44,10 @@ namespace Market_Project.Validators
                 return false;
             }
 
+            //Courtesy of @Pure.Krome's comment and https://stackoverflow.com/a/25654227/563532
             Uri outUri;
-            return Uri.TryCreate(link, UriKind.Absolute, out outUri) 
-                && (outUri.Scheme == Uri.UriSchemeHttp || outUri.Scheme == Uri.UriSchemeHttps);
+            return Uri.TryCreate(link, UriKind.Absolute, out outUri)
+                   && (outUri.Scheme == Uri.UriSchemeHttp || outUri.Scheme == Uri.UriSchemeHttps);
         }
-        //asd//
     }
 }

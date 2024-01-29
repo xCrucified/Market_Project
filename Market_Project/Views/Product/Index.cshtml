@@ -1,5 +1,5 @@
-﻿@using data_access.Data.Entities;
-@model List<Product>;
+﻿@using BusinessLogic.DTOs;
+@model List<ProductDto>;
 
 <h1>Product Panel</h1>
 <p>You can manage the available products here.</p>
@@ -31,10 +31,10 @@
                     @if (i.Discount > 0)
                     {
                         <span class="badge bg-primary">SALE</span>
-                    }
+                    }   
                 </td>
                 <td>@i.Price$</td>
-                <td>@i.Categories?.Name</td>
+                <td>@i.CategoryName</td>
                 <td>@i.Discount%</td>
                 <td>
                     @if (i.InStock)

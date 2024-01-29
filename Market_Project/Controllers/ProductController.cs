@@ -1,36 +1,45 @@
-﻿using data_access.Data;
+﻿using AutoMapper;
+using BusinessLogic.DTOs;
+using data_access.Data;
 using data_access.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Market_Project.Controllers
 {
     public class ProductController : Controller
     {
         private readonly MarketDbContext context;
+        private readonly IMapper mapper;
         private void LoadCategories()
         {
-            ViewBag.Categories = new SelectList(context.Categories.ToList(), nameof(Category.Id), nameof(Category.Name));
+            var categories = mapper.Map<List<CategoryDto>>(context.Categories.ToList());
+            ViewBag.Categories = new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
         }
-        public ProductController(MarketDbContext context)
+        public ProductController(MarketDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         public IActionResult Index()
         {
-            var products = context.Products.ToList();
+            var products = mapper.Map<List<ProductDto>>(context.Products.Include(x => x.Categories).ToList());
 
             return View(products);
         }
 
-        public IActionResult Create(Product model)
+        public IActionResult Create(ProductDto model)
         {
             LoadCategories();
-            if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View();
+            }
 
-            context.Products.Add(model);
+            context.Products.Add(mapper.Map<Product>(model));
             context.SaveChanges();
-            ViewBag.Categories = new SelectList(context.Categories, "Name", "Id");
 
             return RedirectToAction(nameof(Index));
         }
@@ -38,14 +47,13 @@ namespace Market_Project.Controllers
         public IActionResult Details(int id)
         {
             var product = context.Products.Find(id);
-
-            context.Entry(product)
-                .Reference(x => x.Categories)
-                .Load();
-
             if (product == null) return NotFound();
 
-            return View(product);
+            context.Entry(product).Reference(x => x.Categories).Load();
+
+            var dto = mapper.Map<ProductDto>(product);
+
+            return View(dto);
         }
         public IActionResult Edit(int id)
         {
@@ -53,7 +61,7 @@ namespace Market_Project.Controllers
             if (product == null) return NotFound();
 
             LoadCategories();
-            return View(product);
+            return View(mapper.Map<ProductDto>(product));
         }
 
         [HttpPost]
@@ -65,7 +73,7 @@ namespace Market_Project.Controllers
                 return View();
             }
 
-            context.Products.Update(model);
+            context.Products.Update(mapper.Map<Product>(model));
             context.SaveChanges();
 
             return RedirectToAction(nameof(Index));

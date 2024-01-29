@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market_Project", "Market_Project\Market_Project.csproj", "{72E48F98-1BE0-4551-8842-ED7939806CC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market_Project", "Market_Project\Market_Project.csproj", "{72E48F98-1BE0-4551-8842-ED7939806CC2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D21C41F8-8535-4F27-A2F5-61C12248EBC0} = {D21C41F8-8535-4F27-A2F5-61C12248EBC0}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data_access", "Data\data_access.csproj", "{0CBF4718-B503-4C76-9998-0529ECB1AC52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "data_access", "Data\data_access.csproj", "{0CBF4718-B503-4C76-9998-0529ECB1AC52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "ClassLibrary1\BusinessLogic.csproj", "{D21C41F8-8535-4F27-A2F5-61C12248EBC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{0CBF4718-B503-4C76-9998-0529ECB1AC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CBF4718-B503-4C76-9998-0529ECB1AC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CBF4718-B503-4C76-9998-0529ECB1AC52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D21C41F8-8535-4F27-A2F5-61C12248EBC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21C41F8-8535-4F27-A2F5-61C12248EBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D21C41F8-8535-4F27-A2F5-61C12248EBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21C41F8-8535-4F27-A2F5-61C12248EBC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
