@@ -38,6 +38,7 @@ namespace Market_Project.Controllers
         public IActionResult Details(int id)
         {
             var product = context.Products.Find(id);
+
             context.Entry(product)
                 .Reference(x => x.Categories)
                 .Load();

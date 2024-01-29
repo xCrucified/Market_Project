@@ -13,10 +13,5 @@ namespace data_access.Data.Entities
         public Boolean? wasUsed { get; set; }
         public Boolean? isNew { get; set; }
         public string? Model { get; set; }
-        //public string ownAtr { get; set; }
-        //public string? Colors { get; set; }
-        //private Color? _colors { get; set; }
-
-        //public Product products { get; set; }
     }
 }
