@@ -54,12 +54,6 @@ namespace data_access.Data
                 new Attributes() { Id = 3, isNew = false, Model = "Jordan", wasUsed = true},
             });
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    base.OnConfiguring(optionsBuilder);
-
-        //    optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MarketDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-        //}
 
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }

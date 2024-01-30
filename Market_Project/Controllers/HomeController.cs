@@ -19,13 +19,11 @@ namespace Market_Project.Controllers
             this.context = context;
             this.mapper = mapper;
         }
-
         public IActionResult Index()
         {
             var products = mapper.Map < List < ProductDto >> (context.Products.Include(x => x.Categories).ToList());
             return View(products);
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
