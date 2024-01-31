@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
+using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
 using data_access.Data;
 using data_access.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -12,48 +14,41 @@ namespace Market_Project.Controllers
     {
         private readonly MarketDbContext context;
         private readonly IMapper mapper;
+        private readonly IProductsService productsService;
         private void LoadCategories()
         {
             var categories = mapper.Map<List<CategoryDto>>(context.Categories.ToList());
             ViewBag.Categories = new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
         }
-        public ProductController(MarketDbContext context, IMapper mapper)
+        public ProductController(MarketDbContext context, IMapper mapper, IProductsService productsService)
         {
             this.context = context;
             this.mapper = mapper;
+            this.productsService = productsService;
         }
         public IActionResult Index()
         {
-            var products = mapper.Map<List<ProductDto>>(context.Products.Include(x => x.Categories).ToList());
-
-            return View(products);
+            return View(productsService.GetAll());
         }
 
         public IActionResult Create(ProductDto model)
         {
-            LoadCategories();
             if (!ModelState.IsValid)
             {
                 LoadCategories();
                 return View();
             }
 
-            context.Products.Add(mapper.Map<Product>(model));
-            context.SaveChanges();
-
+            productsService.Create(model);
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Details(int id)
         {
-            var product = context.Products.Find(id);
+            var product = productsService.Get(id);
             if (product == null) return NotFound();
 
-            context.Entry(product).Reference(x => x.Categories).Load();
-
-            var dto = mapper.Map<ProductDto>(product);
-
-            return View(dto);
+            return View(product);
         }
         public IActionResult Edit(int id)
         {
@@ -65,7 +60,7 @@ namespace Market_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Product model)
+        public IActionResult Edit(ProductDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -73,20 +68,12 @@ namespace Market_Project.Controllers
                 return View();
             }
 
-            context.Products.Update(mapper.Map<Product>(model));
-            context.SaveChanges();
-
+            productsService.Edit(model);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Delete(int id)
         {
-            var product = context.Products.Find(id);
-
-            if (product == null) return NotFound();
-
-            context.Remove(product);
-            context.SaveChanges();
-
+            productsService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
     }

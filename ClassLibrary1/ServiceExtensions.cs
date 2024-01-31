@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using BusinessLogic;
-using AutoMapper;
-
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+using data_access.Data;
 
 namespace BusinessLogic
 {

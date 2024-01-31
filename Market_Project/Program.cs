@@ -1,5 +1,5 @@
 using BusinessLogic;
-using data_access.Data;
+using data_access;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market_Project
@@ -12,7 +12,7 @@ namespace Market_Project
             var connStr = builder.Configuration.GetConnectionString("LocalDb");
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<MarketDbContext>(opts => opts.UseSqlServer(connStr));
+            builder.Services.AddDbContext(connStr);
 
             builder.Services.AddAutoMapper();
             builder.Services.AddFluentValidators();
