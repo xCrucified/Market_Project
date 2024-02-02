@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces;
-using BusinessLogic.Services;
 using data_access.Data;
 using data_access.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace Market_Project.Controllers
 {

@@ -1,5 +1,5 @@
 using BusinessLogic;
-using data_access;
+using data_access.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market_Project
@@ -17,6 +17,17 @@ namespace Market_Project
             builder.Services.AddAutoMapper();
             builder.Services.AddFluentValidators();
 
+            builder.Services.AddCustomServices();
+
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             var app = builder.Build();
                 
             if (!app.Environment.IsDevelopment())
@@ -25,12 +36,15 @@ namespace Market_Project
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

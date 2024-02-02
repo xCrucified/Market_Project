@@ -16,8 +16,12 @@
         }
         <h5 class="card-title fs-1">@Model.Name</h5>
         <p class="card-text fs-4">@Model.Price$ - @Model.CategoryName</p>
-        <a href="#" class="btn btn-success my-3">Buy</a>
         <div>
+            <a asp-controller="Favorite" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add to Cart</a>
+            <a href="#" class="btn btn-success my-3">Buy</a>
+        </div>
+        <div>
+
             <img src="@Model.ImageUrl" alt="Product Image" />
         </div>
         <p class="card-text">@Model.Description</p>

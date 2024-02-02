@@ -25,6 +25,10 @@ body {
     font-size: 10px;
 }
 
+ul{
+    list-style:none;
+}
+
 .image-fix{
     width:100%;
     height:100%;
