@@ -19,9 +19,9 @@ namespace BusinessLogic.Services
             this.mapper = mapper;
             this.context = context;
         }
-        public void Create(ProductDto product)
+        public async void Create(ProductDto product)
         {
-            context.Products.Add(mapper.Map<Product>(product));
+            await context.Products.AddAsync(mapper.Map<Product>(product));
             context.SaveChanges();
         }
 
