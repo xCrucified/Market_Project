@@ -30,6 +30,7 @@ namespace Market_Project.Controllers
         }
         public IActionResult Remove(int id)
         {
+            var ids = HttpContext.Session.Get<List<int>>(key).Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }
