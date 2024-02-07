@@ -1,6 +1,9 @@
 using BusinessLogic;
+using BusinessLogic.Interfaces;
 using data_access.Data;
+using Market_Project.Controllers;
 using Microsoft.EntityFrameworkCore;
+using Market_Project.Services;
 
 namespace Market_Project
 {
@@ -14,10 +17,12 @@ namespace Market_Project
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext(connStr);
 
+
             builder.Services.AddAutoMapper();
             builder.Services.AddFluentValidators();
 
             builder.Services.AddCustomServices();
+            builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 
             builder.Services.AddDistributedMemoryCache();
 

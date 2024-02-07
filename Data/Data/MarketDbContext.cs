@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace data_access.Data
 {
-    public class MarketDbContext : DbContext
+    public class MarketDbContext : IdentityDbContext
     {
         public MarketDbContext(DbContextOptions options) : base(options) { }
 
@@ -56,7 +56,6 @@ namespace data_access.Data
         }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Attributes> Attributes { get; set; }
     }

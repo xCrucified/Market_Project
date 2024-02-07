@@ -2,36 +2,36 @@
 using Microsoft.AspNetCore.Mvc;
 using Market_Project.Helpers;
 using System.Text.Json;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Market_Project.Controllers
 {
     public class FavoriteController : Controller
     {
-        const string key = "cart_items_key";
-        private readonly IProductsService productsService;
+        //Add scaffolded items "Login, register, Logout";!!!!!
+        private readonly IFavoriteService favoriteService;
 
-        public FavoriteController(IProductsService productsService)
+        public FavoriteController(IFavoriteService cartService)
         {
-            this.productsService = productsService;
+            this.favoriteService = cartService;
         }
-        public IActionResult Index()
-        {
-            var ids = HttpContext.Session.Get<List<int>>(key) ?? new();
-            return View(productsService.Get(ids));
-        }
-        public IActionResult Add(int id)
-        {
-            var ids = HttpContext.Session.Get<List<int>>(key) ?? new();
-            ids.Add(id);
 
-            HttpContext.Session.SetString(key, JsonSerializer.Serialize(ids));
-
-            return RedirectToAction(nameof(Index));
-        }
-        public IActionResult Remove(int id)
+        public IActionResult Index(string returnUrl)
         {
-            var ids = HttpContext.Session.Get<List<int>>(key).Remove(id);
-            return RedirectToAction(nameof(Index));
+            ViewBag.ReturnUrl = returnUrl;
+            return View(favoriteService.GetProducts());
+        }
+
+        public IActionResult Add(int id, string returnUrl)
+        {
+            favoriteService.Add(id);
+            return Redirect(returnUrl);
+        }
+
+        public IActionResult Remove(int id, string returnUrl)
+        {
+            favoriteService.Remove(id);
+            return Redirect(returnUrl);
         }
     }
 }
