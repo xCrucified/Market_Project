@@ -4,6 +4,7 @@ namespace Market_Project.Helpers
 {
     public static class SessionExtensions
     {
+        //drops for identities
         public static void Set<T>(this ISession session, string key, T value)
         {
             session.SetString(key, JsonSerializer.Serialize(value));

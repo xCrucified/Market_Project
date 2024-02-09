@@ -43,7 +43,6 @@ namespace Market_Project.Controllers
 
         public IActionResult Details(int id)
         {
-
             var product = productsService.Get(id);
             if (product == null) return NotFound();
 

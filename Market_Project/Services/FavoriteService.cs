@@ -20,13 +20,18 @@ namespace Market_Project.Services
             httpContext = contextAccessor.HttpContext ?? throw new Exception();
         }
 
-        private List<int> GetFavoriteItems()
+        private List<int>? GetFavoriteItems()
         {
             return httpContext.Session.Get<List<int>>(key) ?? new();
+            //change for identities
+            //var value = httpContext.Session.GetString(key);
+            //return value == null ? default : JsonSerializer.Deserialize<List<int>>(value);
         }
         private void SaveFavoriteItems(List<int> items)
         {
             httpContext.Session.Set(key, items);
+            //change for identities
+            //httpContext.Session.SetString(key, JsonSerializer.Serialize(items));
         }
 
         public void Add(int id)

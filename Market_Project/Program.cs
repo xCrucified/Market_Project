@@ -4,6 +4,7 @@ using data_access.Data;
 using Market_Project.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Market_Project.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace Market_Project
 {
@@ -16,6 +17,8 @@ namespace Market_Project
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext(connStr);
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MarketDbContext>();
 
 
             builder.Services.AddAutoMapper();
