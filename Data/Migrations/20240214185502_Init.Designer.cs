@@ -12,15 +12,15 @@ using data_access.Data;
 namespace data_access.Migrations
 {
     [DbContext(typeof(MarketDbContext))]
-    [Migration("20240207185435_TestMigration")]
-    partial class TestMigration
+    [Migration("20240214185502_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -329,6 +329,28 @@ namespace data_access.Migrations
                         });
                 });
 
+            modelBuilder.Entity("data_access.Data.Entities.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("Country");
+                });
+
             modelBuilder.Entity("data_access.Data.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -413,8 +435,8 @@ namespace data_access.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -442,6 +464,7 @@ namespace data_access.Migrations
                         {
                             Id = 1,
                             Balance = 1000.50m,
+                            CountryId = 0,
                             Email = "john.doe@example.com",
                             Name = "John Doe",
                             Password = "password123",
@@ -452,6 +475,7 @@ namespace data_access.Migrations
                         {
                             Id = 2,
                             Balance = 750.25m,
+                            CountryId = 0,
                             Email = "jane.smith@example.com",
                             Name = "Jane Smith",
                             Password = "securepass",
@@ -462,6 +486,7 @@ namespace data_access.Migrations
                         {
                             Id = 3,
                             Balance = 1200.75m,
+                            CountryId = 0,
                             Email = "michael.johnson@example.com",
                             Name = "Michael Johnson",
                             Password = "pass123",
@@ -472,6 +497,7 @@ namespace data_access.Migrations
                         {
                             Id = 4,
                             Balance = 850.30m,
+                            CountryId = 0,
                             Email = "emily.brown@example.com",
                             Name = "Emily Brown",
                             Password = "strongpass",
@@ -531,6 +557,17 @@ namespace data_access.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("data_access.Data.Entities.Country", b =>
+                {
+                    b.HasOne("data_access.Data.Entities.User", "Users")
+                        .WithMany("Countries")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("data_access.Data.Entities.Product", b =>
                 {
                     b.HasOne("data_access.Data.Entities.Category", "Categories")
@@ -545,6 +582,11 @@ namespace data_access.Migrations
             modelBuilder.Entity("data_access.Data.Entities.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("data_access.Data.Entities.User", b =>
+                {
+                    b.Navigation("Countries");
                 });
 #pragma warning restore 612, 618
         }

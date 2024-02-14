@@ -4,8 +4,6 @@ using BusinessLogic.Interfaces;
 using data_access.Data;
 using data_access.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Runtime.InteropServices.Marshalling;
 
 namespace BusinessLogic.Services
 {
@@ -19,26 +17,33 @@ namespace BusinessLogic.Services
             this.mapper = mapper;
             this.context = context;
         }
-        public async void Create(ProductDto product)
+        public void Create(CreateProductModel product)
         {
-            await context.Products.AddAsync(mapper.Map<Product>(product));
+            context.Products.Add(mapper.Map<Product>(product));
             context.SaveChanges();
+        }
+
+        public void Create(ProductDto product)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(int id)
         {
             var product = context.Products.Find(id);
 
-            if (product == null) return; 
+            if (product == null) return;
 
             context.Remove(product);
             context.SaveChanges();
         }
+
         public void Edit(ProductDto product)
         {
             context.Products.Update(mapper.Map<Product>(product));
             context.SaveChanges();
         }
+
         public ProductDto? Get(int id)
         {
             var item = context.Products.Find(id);
@@ -50,20 +55,23 @@ namespace BusinessLogic.Services
 
             return dto;
         }
-        public IEnumerable<ProductDto> GetAll()
-        {
-            return mapper.Map<List<ProductDto>>(context.Products.Include(x => x.Categories).ToList());
-        }
-        public IEnumerable<CategoryDto> GetAllCategories()
-        {
-            return mapper.Map<List<CategoryDto>>(context.Categories.ToList());
-        }
+
         public IEnumerable<ProductDto> Get(IEnumerable<int> ids)
         {
             return mapper.Map<List<ProductDto>>(context.Products
                 .Include(x => x.Categories)
                 .Where(x => ids.Contains(x.Id))
                 .ToList());
+        }
+
+        public IEnumerable<ProductDto> GetAll()
+        {
+            return mapper.Map<List<ProductDto>>(context.Products.Include(x => x.Categories).ToList());
+        }
+
+        public IEnumerable<CategoryDto> GetAllCategories()
+        {
+            return mapper.Map<List<CategoryDto>>(context.Categories.ToList());
         }
     }
 }

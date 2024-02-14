@@ -11,5 +11,6 @@ namespace BusinessLogic.Interfaces
         void Edit(ProductDto product);
         void Delete(int id);
         IEnumerable<ProductDto> Get(IEnumerable<int> ids);
+        void Create(CreateProductModel model);
     }
 }
