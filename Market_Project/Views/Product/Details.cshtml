@@ -1,30 +1,27 @@
 ﻿@using BusinessLogic.DTOs;
 @model ProductDto;
 
-<div class="text-start">
-    <a asp-controller="Home" asp-action="Index" class="btn btn-dark my-3">Back</a>
-</div>
-
-<div class="card text-center">
-    <h5 class="card-header">Product Information</h5>
-    <div class="card-body">
-        @if (Model.Discount > 0)
-        {
-            <div>
-                <span class="badge bg-primary">SALE</span>
+<div class="card mb-3 bg-light util-detail-pos">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img class="image-fix" src="@Model.ImageUrl" alt="Product Image" />
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">@Model.Price$</p>
+                <p class="card-text">@Model.CategoryName</p>
+                <p class="card-text"><small class="text-body-secondary">@Html.Raw(Model.Description)</small></p>
             </div>
-        }
-        <h5 class="card-title fs-1">@Model.Name</h5>
-        <p class="card-text fs-4">@Model.Price$ - @Model.CategoryName</p>
-        <div>
-            <a asp-controller="Favorite" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Cart</a>
-            <a href="#" class="btn btn-success my-3">Buy</a>
         </div>
-        <div>
-            
-            <img class="image-fix-detail" src="@Model.ImageUrl" alt="Product Image" />
-        </div>
-        <p class="card-text">@Html.Raw(Model.Description)</p>
     </div>
 </div>
 
+<div class="btn-centerize">
+    <div class="text-start">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-danger my-3">Back</a>
+    </div>
+    <div>
+        <a asp-controller="Favorite" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-outline-success">Add to Cart</a>
+    </div>
+</div>

@@ -22,9 +22,9 @@ namespace BusinessLogic.Services
         public async Task<string> SaveProductImage(IFormFile file)
         {
             // get image destination path
-            string root = environment.WebRootPath;      // wwwroot
-            string name = Guid.NewGuid().ToString();    // random name
-            string extension = Path.GetExtension(file.FileName); // get original extension
+            string root = environment.WebRootPath;     
+            string name = Guid.NewGuid().ToString();   
+            string extension = Path.GetExtension(file.FileName); 
             string fullName = name + extension;         // full name: name.ext
 
             // create destination image file path

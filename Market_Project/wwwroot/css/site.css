@@ -36,8 +36,32 @@ ul{
     object-fit: cover;
 }
 
-.image-fix-detail {
-    width: 50%;
-    height: 50%;
-    object-fit: cover;
+.util-detail-pos {
+    margin-top:10%;
+    width:100%;
+}
+    .util-detail-pos > div {
+        background-color: lightslategrey;
+    }
+    .util-detail-pos div>p,h5{
+        display:flex;
+        justify-content:center;
+    }
+    .util-detail-pos h5{
+        font-weight:bolder;
+    }
+
+.btn-centerize {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+
+table {
+    background-color: lightslategrey;
+}
+
+.form-container>div>input,select {
+    background-color:ghostwhite;
 }
