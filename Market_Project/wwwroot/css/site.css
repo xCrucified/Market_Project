@@ -65,3 +65,26 @@ table {
 .form-container>div>input,select {
     background-color:ghostwhite;
 }
+
+.bg-fix{
+    display:flex;
+    flex-direction:row;
+    list-style:none;
+}
+
+a{
+    color:black;
+    text-decoration:none;
+}
+
+a:hover{
+    color: lightgray;
+}
+
+.addiction-btn > p {
+    background-color: rgba(95, 100, 145, 0.26);
+    padding:10px;
+}
+.background-fix{
+    background-color:lightslategrey;
+}

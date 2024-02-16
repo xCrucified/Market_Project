@@ -4,6 +4,7 @@ using data_access.Data;
 using Microsoft.EntityFrameworkCore;
 using Market_Project.Services;
 using Microsoft.AspNetCore.Identity;
+using data_access.Data.Entities;
 
 namespace Market_Project
 {
@@ -17,7 +18,7 @@ namespace Market_Project
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext(connStr);
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MarketDbContext>();
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MarketDbContext>();
 
 
             builder.Services.AddAutoMapper();
@@ -52,6 +53,8 @@ namespace Market_Project
             app.UseAuthorization();
 
             app.UseSession();
+
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

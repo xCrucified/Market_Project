@@ -1,14 +1,7 @@
 ﻿@page
 @model LoginModel
-
-@{
-    ViewData["Title"] = "Log in";
-}
-
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
+    
+@*         <section>
             <form id="account" method="post">
                 <h2>Use a local account to log in.</h2>
                 <hr />
@@ -44,9 +37,9 @@
                     </p>
                 </div>
             </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
+        </section> 
+    
+     <div class="col-md-6 col-md-offset-2" style="background-color:lightslategrey;">
         <section>
             <h3>Use another service to log in.</h3>
             <hr />
@@ -75,9 +68,69 @@
                 }
             }
         </section>
-    </div>
-</div>
+    </div> *@
 
+<section class="vh-100">
+<form id="account" method="post">
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <h3 class="mb-5 text-white d-flex justify-content-center">Sign in</h3>
+                <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: lightslategrey">
+                    <div class="card-body p-5 text-center">
+
+                        @* <div class="form-outline mb-4 bg">
+                            <label class="form-label font-monospace" for="typeEmailX-2">Login</label>
+                            <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
+                        </div> *@
+                        @* <div class="form-outline mb-4">
+                            <label class="form-label font-monospace" for="typePasswordX-2">Password</label>
+                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+                        </div> *@
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.Email" class="form-label">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password" class="form-label">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <!-- Checkbox -->
+                        @* <div class="form-check d-flex justify-content-start mb-4 gap-2">
+                            <input class="form-check-input" asp-for="Input.RememberMe" type="checkbox" value="" id="form1Example3" />
+                            <label class="form-check-label font-monospace" for="form1Example3"> Remember password </label>
+                        </div> *@
+                        <div class="checkbox mb-3">
+                            <label asp-for="Input.RememberMe" class="form-label">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                        <div>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                        </div>
+                        <div class="addiction-btn mt-3">
+                            <p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p>
+                            <p>
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            </p>
+                            <p>
+                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</section>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

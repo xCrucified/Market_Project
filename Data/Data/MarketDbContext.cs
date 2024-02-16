@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace data_access.Data
 {
-    public class MarketDbContext : IdentityDbContext
+    public class MarketDbContext : IdentityDbContext<User>
     {
         public MarketDbContext(DbContextOptions options) : base(options) { }
 
