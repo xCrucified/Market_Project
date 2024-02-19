@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Market_Project.Services;
 using Microsoft.AspNetCore.Identity;
 using data_access.Data.Entities;
+using Market_Project.Helpers;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Market_Project
 {
@@ -18,14 +20,20 @@ namespace Market_Project
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext(connStr);
 
-            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MarketDbContext>();
-
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<MarketDbContext>();
 
             builder.Services.AddAutoMapper();
             builder.Services.AddFluentValidators();
 
             builder.Services.AddCustomServices();
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+            builder.Services.AddScoped<IViewRender, ViewRender>();
 
             builder.Services.AddDistributedMemoryCache();
 
@@ -37,7 +45,13 @@ namespace Market_Project
             });
 
             var app = builder.Build();
-                
+            
+            using (var scope = app.Services.CreateScope())
+            {
+                Seeder.SeedRoles(scope.ServiceProvider).Wait();
+                Seeder.SeedAdmin(scope.ServiceProvider).Wait();
+            }
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");

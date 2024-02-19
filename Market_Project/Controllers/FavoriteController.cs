@@ -8,7 +8,6 @@ namespace Market_Project.Controllers
 {
     public class FavoriteController : Controller
     {
-        //Add scaffolded items "Login, register, Logout";!!!!!
         private readonly IFavoriteService favoriteService;
 
         public FavoriteController(IFavoriteService cartService)

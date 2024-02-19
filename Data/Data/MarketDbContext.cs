@@ -34,16 +34,9 @@ namespace data_access.Data
                 new Product() { Id = 2, Name = "Smartphone", CategoryId = 2, Description = "High-performance device", InStock = true, Discount = 5, Price = 899, ImageUrl = "https://th.bing.com/th/id/OIP.6OI-0NfjMZtcYKH8VulQjgHaFe?rs=1&pid=ImgDetMain" },
                 new Product() { Id = 3, Name = "Running Shoes", CategoryId = 3, Description = "Comfortable and durable", InStock = true, Price = 79, ImageUrl = "https://th.bing.com/th/id/OIP.mgap1fs9rd1GOuf4S4KQTwHaEE?rs=1&pid=ImgDetMain" },
             });
-            modelBuilder.Entity<Attributes>().HasData(new[]
-            {
-                new Attributes() { Id = 1, isNew = true, Model = "Audi", wasUsed = false},
-                new Attributes() { Id = 2},
-                new Attributes() { Id = 3, isNew = false, Model = "Jordan", wasUsed = true},
-            });
         }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Attributes> Attributes { get; set; }
     }
 }

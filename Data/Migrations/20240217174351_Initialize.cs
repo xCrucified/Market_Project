@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace data_access.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,7 @@ namespace data_access.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -53,21 +54,6 @@ namespace data_access.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attributes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    wasUsed = table.Column<bool>(type: "bit", nullable: true),
-                    isNew = table.Column<bool>(type: "bit", nullable: true),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Attributes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -78,25 +64,6 @@ namespace data_access.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Registration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,36 +197,6 @@ namespace data_access.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Country_User_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Attributes",
-                columns: new[] { "Id", "Model", "isNew", "wasUsed" },
-                values: new object[,]
-                {
-                    { 1, "Audi", true, false },
-                    { 2, null, null, null },
-                    { 3, "Jordan", false, true }
-                });
-
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "Name" },
@@ -274,17 +211,6 @@ namespace data_access.Migrations
                     { 7, "Musical Instruments" },
                     { 8, "Art" },
                     { 9, "Other" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "User",
-                columns: new[] { "Id", "Balance", "CountryId", "Email", "Name", "Password", "Registration", "UserName" },
-                values: new object[,]
-                {
-                    { 1, 1000.50m, 0, "john.doe@example.com", "John Doe", "password123", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john_doe" },
-                    { 2, 750.25m, 0, "jane.smith@example.com", "Jane Smith", "securepass", new DateTime(2000, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane_smith" },
-                    { 3, 1200.75m, 0, "michael.johnson@example.com", "Michael Johnson", "pass123", new DateTime(2000, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "michael_j" },
-                    { 4, 850.30m, 0, "emily.brown@example.com", "Emily Brown", "strongpass", new DateTime(2000, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "emily_b" }
                 });
 
             migrationBuilder.InsertData(
@@ -337,11 +263,6 @@ namespace data_access.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Country_UsersId",
-                table: "Country",
-                column: "UsersId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
@@ -366,12 +287,6 @@ namespace data_access.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Attributes");
-
-            migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
@@ -379,9 +294,6 @@ namespace data_access.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Categories");
