@@ -12,8 +12,8 @@ using data_access.Data;
 namespace data_access.Migrations
 {
     [DbContext(typeof(MarketDbContext))]
-    [Migration("20240217174351_Initialize")]
-    partial class Initialize
+    [Migration("20240219161901_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
