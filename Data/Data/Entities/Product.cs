@@ -16,9 +16,10 @@ namespace data_access.Data.Entities
         public string? Description { get; set; }
         public bool InStock { get; set; }
         public string? ImageUrl { get; set; }
-
-        //public ICollection<Attributes>? attributes { get; set; }
+        public DateTime postDate { get; set; }
+        public Country? Countries { get; set; }
         public Category?Categories { get; set; }
         public int CategoryId { get; set; }
+        public int CountryId { get; set; }
     }
 }

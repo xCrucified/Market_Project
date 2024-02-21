@@ -10,6 +10,7 @@ namespace data_access.Data.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public User Users { get; set; }
+        public ICollection<User> Users { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

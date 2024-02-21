@@ -3,11 +3,13 @@ using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces;
 using data_access.Data;
 using data_access.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Market_Project.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly MarketDbContext context;
@@ -24,6 +26,7 @@ namespace Market_Project.Controllers
             this.mapper = mapper;
             this.productsService = productsService;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(productsService.GetAll());

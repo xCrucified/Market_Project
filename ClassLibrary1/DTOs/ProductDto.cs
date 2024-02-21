@@ -13,6 +13,8 @@ namespace BusinessLogic.DTOs
         public decimal Price { get; set; }
         public int Discount { get; set; }
         public int CategoryId { get; set; }
+        public int CountryId { get; set; }
+        public string? CountryName { get; set; }
         public string? CategoryName { get; set; }
         public string? Description { get; set; }
         public bool InStock { get; set; }
